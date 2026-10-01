@@ -1,30 +1,11 @@
-﻿var array = new object[15];
-for (var i = 0; i < array.Length; i++)
-{
-    array[i] = Random.Shared.Next(2) switch
-    {
-        0 => Random.Shared.Next(-100, 100),
-        1 => Random.Shared.NextSingle() * 200f - 100f,
-        // 2 => string.Empty,
-        _ => throw new ArgumentOutOfRangeException()
-    };
-}
+﻿using CollageApp;
 
-Console.WriteLine(ArraySum(array));
+var stringBook = new Book<string>("Elements of Game Design", 300, "Robert Zubek", "u746TTq9pO");
+var intBook = new Book<int>("Brain of the player", 431, "Selia Hodent", 444000);
+var guidBook = new Book<Guid>("Game as business", 250, "Alexey Savchenko", Guid.NewGuid());
+
+Console.WriteLine(stringBook);
+Console.WriteLine(intBook);
+Console.WriteLine(guidBook);
 
 return;
-
-float ArraySum(object[] array)
-{
-    var sum = 0f;
-    
-    foreach (var obj in array)
-    {
-        // Console.WriteLine(obj.GetType());
-        if (obj is not (int or float)) continue;
-        var value = Convert.ToSingle(obj);
-        sum += value;
-    }
-
-    return sum;
-}
