@@ -1,20 +1,22 @@
 ﻿using CollageApp;
 
-Property[] properties =
-[
-    new Apartment(500 + Random.Shared.NextSingle() * 10000,Random.Shared.Next(30, 100)),
-    new Apartment(500 + Random.Shared.NextSingle() * 10000, Random.Shared.Next(30, 100)),
-    new Apartment(500 + Random.Shared.NextSingle() * 10000, Random.Shared.Next(30, 100)),
-    new Car(500 + Random.Shared.NextSingle() * 1000, Random.Shared.Next(50, 100)),
-    new Car(500 + Random.Shared.NextSingle() * 1000, Random.Shared.Next(50, 100)),
-    new Car(500 + Random.Shared.NextSingle() * 1000, Random.Shared.Next(50, 100)),
-    new Boat(500 + Random.Shared.NextSingle() * 600, Random.Shared.Next(70, 120)),
-    new Boat(500 + Random.Shared.NextSingle() * 600, Random.Shared.Next(70, 120)),
-    new CountryHouse(500 + Random.Shared.NextSingle() * 900, Random.Shared.Next(20, 100)),
-    new CountryHouse(500 + Random.Shared.NextSingle() * 900, Random.Shared.Next(20, 100)),
-];
+var array = new IntArrayList();
 
-foreach (var property in properties)
-{
-    Console.WriteLine(property);
-}
+array.PushBack(GetRandomNum());
+array.PushBack(GetRandomNum());
+array.PushBack(GetRandomNum());
+
+array.TryInsert(1, GetRandomNum());
+
+array.TryErase(1);
+
+array.TryGetAt(1, out var value);
+Console.WriteLine($"Item in 1 is {value}\n");
+
+array.PopBack();
+
+array.Clear();
+
+return;
+
+int GetRandomNum() => Random.Shared.Next(100);
