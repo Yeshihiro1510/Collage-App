@@ -1,11 +1,12 @@
-﻿using CollageApp;
+﻿using System.Numerics;
+using CollageApp;
 
 // Упаковка и распаковка
 
-var array = new object[15];
-for (var i = 0; i < array.Length; i++)
+var objects = new object[15];
+for (var i = 0; i < objects.Length; i++)
 {
-    array[i] = Random.Shared.Next(2) switch
+    objects[i] = Random.Shared.Next(2) switch
     {
         0 => Random.Shared.Next(-100, 100),
         1 => Random.Shared.NextSingle() * 200f - 100f,
@@ -14,12 +15,12 @@ for (var i = 0; i < array.Length; i++)
     };
 }
 
-Console.WriteLine(ArraySum(array));
+Console.WriteLine(ArraySum(objects));
 
 float ArraySum(object[] array)
 {
     var sum = 0f;
-    
+
     foreach (var obj in array)
     {
         // Console.WriteLine(obj.GetType());
@@ -57,10 +58,10 @@ Console.WriteLine(bookGeneric.Value);
 
 // Обобщенный метод
 
-var intCircle = new Circle<int>(5);
-var stringCircle = new Circle<string>("7");
-var doubleCircle = new Circle<double>(3.2);
-var floatCircle = new Circle<float>(2.4f);
+var intCircle = new Circle<int>(Vector2.Zero, 5);
+var stringCircle = new Circle<string>(Vector2.Zero, "7");
+var doubleCircle = new Circle<double>(Vector2.Zero, 3.2);
+var floatCircle = new Circle<float>(Vector2.Zero, 2.4f);
 
 intCircle.SetRadius(6);
 stringCircle.SetRadius("8");
@@ -74,3 +75,10 @@ Console.WriteLine($"Radius: {floatCircle.Radius}, Area: {floatCircle.Area}");
 
 // Обобщенный класс с несколькими универсальными параметрами
 
+var firstRectangle = new Rectangle<string, int>(Vector2.Zero, "4", 2);
+var secondRectangle = new Rectangle<string, double>(new Vector2(1.5f, 2.5f), "2.5", 3.3);
+var thirdRectangle = new Rectangle<string, float>(new Vector2(-2, 3), "3", 4.2f);
+
+Console.WriteLine($"Min: {firstRectangle.MinPoint} Max: {firstRectangle.MaxPoint}");
+Console.WriteLine($"Min: {secondRectangle.MinPoint} Max: {secondRectangle.MaxPoint}");
+Console.WriteLine($"Min: {thirdRectangle.MinPoint} Max: {thirdRectangle.MaxPoint}");
