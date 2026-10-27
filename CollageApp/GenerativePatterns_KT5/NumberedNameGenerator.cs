@@ -1,4 +1,4 @@
-﻿namespace CollageApp;
+﻿namespace CollageApp.GenerativePatterns_KT5;
 
 public static class NumberedNameGenerator<T>
 {

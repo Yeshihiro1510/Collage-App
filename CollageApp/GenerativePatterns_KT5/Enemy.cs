@@ -1,4 +1,4 @@
-﻿namespace CollageApp;
+﻿namespace CollageApp.GenerativePatterns_KT5;
 
 public abstract class Enemy(string name, int health, Weapon weapon)
 {
