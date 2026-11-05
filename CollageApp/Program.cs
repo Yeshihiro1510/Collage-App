@@ -1,43 +1,40 @@
-﻿using CollageApp.GenerativePatternsTask_KT6;
-using CollageApp.GenerativePatternsTask_KT6.Builder;
+﻿Console.WriteLine("Strategy");
+IStrategy strategy1 = new ConcreteStrategy1();
+Context context = new Context(strategy1);
+Console.Write("Выполнение со Стратегией 1: ");
+context.ExecuteAlgorithm();
 
-// Prototype
+IStrategy strategy2 = new ConcreteStrategy2();
+context.ContextStrategy = strategy2;
+Console.Write("Выполнение со Стратегией 2: ");
+context.ExecuteAlgorithm();
+Console.WriteLine();
 
-IPrototype prototype1 = new ConcretePrototype1(999);
-IPrototype prototype2 = new ConcretePrototype2(111);
 
-var prototypeClone1 = prototype1.Clone();
-var prototypeClone2 = prototype2.Clone();
 
-Console.WriteLine($"{prototypeClone1.Id} {prototypeClone1 == prototype1}");
-Console.WriteLine($"{prototypeClone2.Id} {prototypeClone2 == prototype2}");
+Console.WriteLine("Command");
+Receiver receiver = new Receiver();
+Command command = new ConcreteCommand(receiver);
+Invoker invoker = new Invoker();
+invoker.SetCommand(command);
 
-// Factory method
+Console.Write("Вызов invoker.Run(): ");
+invoker.Run();
 
-IFactoryMethod creator1 = new ConcreteFactoryMethod1();
-IFactoryMethod creator2 = new ConcreteFactoryMethod2();
+Console.Write("Вызов invoker.Cancel(): ");
+invoker.Cancel();
+Console.WriteLine();
 
-CollageApp.GenerativePatternsTask_KT6.Product product1 = creator1.Create();
-CollageApp.GenerativePatternsTask_KT6.Product product2 = creator2.Create();
 
-Console.WriteLine(product1);
-Console.WriteLine(product2);
 
-// Abstract factory
+Console.WriteLine("Chain of responsibility");
+Handler h1 = new ConcreteHandler1();
+Handler h2 = new ConcreteHandler2();
+h1.Successor = h2;
 
-IAbstractFactory factory1 =  new ConcreteFactory1();
-IAbstractFactory factory2 = new ConcreteFactory2();
+Console.Write("Передаем 5 (ожидаем обработку в Handler1): ");
+h1.HandleRequest(5);
 
-var client = new AbstractFactoryClient(factory1);
-
-client.Run();
-
-// Builder
-
-IBuilder builder = new ConcreteBuilder();
-
-var director = new Director(builder);
-
-CollageApp.GenerativePatternsTask_KT6.Builder.Product product = director.Construct();
-
-Console.WriteLine(product);
+Console.Write("Передаем 15 (ожидаем обработку в Handler2): ");
+h1.HandleRequest(15);
+Console.WriteLine();
